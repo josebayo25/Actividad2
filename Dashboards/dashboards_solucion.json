@@ -1,0 +1,1322 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 29,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 85
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.optimizationProblem.scenario.information.scenarioTime",
+              "name": "segundos"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Tiempo del Escenario",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "días",
+            "binary": {
+              "left": "segundos",
+              "operator": "/",
+              "right": "86400"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "false": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Disponible"
+                },
+                "true": {
+                  "color": "semi-dark-red",
+                  "index": 1,
+                  "text": "No Disponible"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 20,
+        "x": 4,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "$map(\n  $sort(\n    $reduce($.optimizationProblem.scenario.berths, function($acc, $berth) {\n      $append($acc, \n        $reduce($berth.unavailableTimes, function($innerAcc, $time) {\n          $append($innerAcc, [$time.startingTime, $time.endTime])\n        }, [])\n      )\n    }, []),\n    function($l, $r) { $l - $r }\n  ),\n  function($time) {\n    $merge([\n      {\"timestamp\": $fromMillis($toMillis(\"2024-01-01T00:00:00Z\") + ($time * 1000), \"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\")},\n      $reduce(\n        $.optimizationProblem.scenario.berths,\n        function($acc, $berth) {\n          $append($acc, {\n            (\"Berth \" & $berth.id): (\n              $boolean($reduce($berth.unavailableTimes, function($innerAcc, $utime) {\n                $append($innerAcc, $time >= $utime.startingTime and $time < $utime.endTime ? 1 : 0)\n              }, []))\n            )\n          })\n        }, {})\n    ])\n  }\n)\n\n",
+              "language": "jsonata"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Disponibilidad Berth",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "format": "auto",
+            "source": "result"
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "timestamp"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "timestamp",
+                "Berth 0",
+                "Berth 1",
+                "Berth 2",
+                "Berth 3",
+                "Berth 4",
+                "Berth 5",
+                "Berth 6",
+                "Berth 7",
+                "Berth 8",
+                "Berth 9"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 10
+      },
+      "id": 12,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "\n\n$map($.optimizationProblem.scenario.vessels, function($vessel) {\n  {\n    \"Buque\": $vessel.id,\n    \"Estado\": [\n      {\n        \"Estado\": \"En servicio\",\n        \"Inicio\": $fromMillis($toMillis(\"2024-01-01T00:00:00Z\") + ($vessel.arrivalTime * 1000), \"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\"),\n        \"Fin\": $fromMillis($toMillis(\"2024-01-01T00:00:00Z\") + (($vessel.arrivalTime + $vessel.servicingTime) * 1000), \"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\")\n      }\n    ]\n  }\n})",
+              "language": "jsonata"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Tiempo de Servicio de los Barcos en puerto",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "source": "result"
+          }
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "format": "kvp",
+            "keepTime": false,
+            "replace": false,
+            "source": "Estado"
+          }
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "keepTime": false,
+            "replace": false,
+            "source": "0"
+          }
+        },
+        {
+          "id": "extractFields",
+          "options": {
+            "replace": true
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Buque",
+                "Inicio",
+                "Fin"
+              ]
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "Inicio"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "Fin"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "description": "Muestra cuánto tiempo toma atender cada embarcación en el puerto.\n\n•\tservicingTime: Tiempo en segundos necesario para atender la embarcación en el puerto.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Tiempo de Servicio (s)"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 10
+      },
+      "id": 1,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].id",
+              "name": "Embarcación"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].servicingTime",
+              "language": "jsonpath",
+              "name": "Tiempo de Servicio (s)"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "Tiempo de Servicio de los Barcos",
+          "urlPath": ""
+        }
+      ],
+      "title": "Tiempo de Servicio de los Barcos en puerto",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Almacen 9"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Almacen 2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Almacen 5"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Almacen 7"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Almacen 6"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Almacen 8"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 7,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].id",
+              "name": "Muelles"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[0]",
+              "language": "jsonpath",
+              "name": "Almacen 0"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[1]",
+              "language": "jsonpath",
+              "name": "Almacen 1"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[2]",
+              "language": "jsonpath",
+              "name": "Almacen 2"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[3]",
+              "language": "jsonpath",
+              "name": "Almacen 3"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[4]",
+              "language": "jsonpath",
+              "name": "Almacen 4"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[5]",
+              "language": "jsonpath",
+              "name": "Almacen 5"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[6]",
+              "language": "jsonpath",
+              "name": "Almacen 6"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[7]",
+              "language": "jsonpath",
+              "name": "Almacen 7"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[8]",
+              "language": "jsonpath",
+              "name": "Almacen 8"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.berths[*].berthToStorageCost[9]",
+              "language": "jsonpath",
+              "name": "Almacen 9"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Costos de Almacenamiento desde los Muelles a los almacenes",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "description": "Representa el tiempo de llegada de cada embarcación. Esto puede ayudar a visualizar la congestión o la secuencia de llegadas.\n\n•\tarrivalTime: Hora de llegada programada de la embarcación en segundos desde el inicio del escenario.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 4,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].id",
+              "name": "embarcación"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].arrivalTime",
+              "language": "jsonpath",
+              "name": "Tiempos de llegada (s)"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Tiempos de llegada de las embarcaciones",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "description": "eje x son  los barcos y  las barras son los almacenes que son de 0-9\n\n•\tcontainersToDeliverByStorage: Número de contenedores que la embarcación entregará en cada almacén. Es un diccionario donde cada clave representa el ID de un almacén y el valor, la cantidad de contenedores.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "id": 5,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "maxWidth": -1,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].id",
+              "name": "Embarcación"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[0]",
+              "language": "jsonpath",
+              "name": "Almacen 0"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[1]",
+              "language": "jsonpath",
+              "name": "Almacen 1"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[2]",
+              "language": "jsonpath",
+              "name": "Almacen 2"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[3]",
+              "language": "jsonpath",
+              "name": "Almacen 3"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[4]",
+              "language": "jsonpath",
+              "name": "Almacen 4"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[5]",
+              "language": "jsonpath",
+              "name": "Almacen 5"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[6]",
+              "language": "jsonpath",
+              "name": "Almacen 6"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[7]",
+              "language": "jsonpath",
+              "name": "Almacen 7"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[8]",
+              "language": "jsonpath",
+              "name": "Almacen 8"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToDeliverByStorage[9]",
+              "language": "jsonpath",
+              "name": "Almacen 9"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Contenedores que la embarcación entregará en cada almacen",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "description": "eje x son  los barcos y  las barras son los almacenes que son de 0-9\n\n•\tcontainersToRetrieveByStorage: Número de contenedores que la embarcación recogerá de cada almacén, con la misma estructura de clave-valor que containersToDeliverByStorage.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 26
+      },
+      "id": 8,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].id",
+              "name": "Embarcaciones"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[0]",
+              "language": "jsonpath",
+              "name": "Almacen 0"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[1]",
+              "language": "jsonpath",
+              "name": "Almacen 1"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[2]",
+              "language": "jsonpath",
+              "name": "Almacen 2"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[3]",
+              "language": "jsonpath",
+              "name": "Almacen 3"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[4]",
+              "language": "jsonpath",
+              "name": "Almacen 4"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[5]",
+              "language": "jsonpath",
+              "name": "Almacen 5"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[6]",
+              "language": "jsonpath",
+              "name": "Almacen 6"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[7]",
+              "language": "jsonpath",
+              "name": "Almacen 7"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[8]",
+              "language": "jsonpath",
+              "name": "Almacen 8"
+            },
+            {
+              "jsonPath": "$.optimizationProblem.scenario.vessels[*].containersToRetrieveByStorage[9]",
+              "language": "jsonpath",
+              "name": "Almacen 9"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Contenedores que la embarcación recogerá en cada almacen",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "ae2x2jco7jmkgf"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "id": 13,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.1.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "ae2x2jco7jmkgf"
+          },
+          "fields": [
+            {
+              "jsonPath": "$append(\n  $map(\n    $sort(\n      $reduce($.optimizationProblem.scenario.berths, function($acc, $berth) {\n        $append($acc, \n          $reduce($berth.unavailableTimes, function($innerAcc, $time) {\n            $append($innerAcc, [$time.startingTime, $time.endTime])\n          }, [])\n        )\n      }, []),\n      function($l, $r) { $l - $r }\n    ),\n    function($time) {\n      $merge([\n        {\"timestamp\": $fromMillis($toMillis(\"2024-01-01T00:00:00Z\") + ($number($time) * 1000), \"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\")},\n        $reduce(\n          $.optimizationProblem.scenario.berths,\n          function($acc, $berth) {\n            $append($acc, {\n              (\"Muelle \" & $berth.id): (\n                $boolean($reduce($berth.unavailableTimes, function($innerAcc, $utime) {\n                  $append($innerAcc, $number($time) >= $number($utime.startingTime) and $number($time) < $number($utime.endTime) ? 1 : 0)\n                }, [])) ? \"No disponible\" : \"Disponible\"\n              )\n            })\n          }, {})\n      ])\n    }\n  ),\n  $map($.optimizationProblem.scenario.vessels, function($vessel, $index) {\n    {\n      \"Buque\": $vessel.id,\n      \"Muelle\": $$.berth[$index],\n      \"Inicio\": $fromMillis($toMillis(\"2024-01-01T00:00:00Z\") + ($number($$.berthingTime[$index]) * 1000), \"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\"),\n      \"Fin\": $fromMillis($toMillis(\"2024-01-01T00:00:00Z\") + (($number($$.berthingTime[$index]) + $number($$.timeInBerth[$index])) * 1000), \"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\")\n    }\n  })\n)",
+              "language": "jsonata"
+            }
+          ],
+          "method": "GET",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Disponibilidad y asignacion del puerto",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "source": "result"
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "timestamp",
+                "Muelle 0",
+                "Muelle 1",
+                "Muelle 2",
+                "Muelle 3",
+                "Muelle 4",
+                "Muelle 5",
+                "Muelle 6",
+                "Muelle 7",
+                "Muelle 8",
+                "Muelle 9",
+                "Buque",
+                "Muelle",
+                "Inicio",
+                "Fin"
+              ]
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "timestamp"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "Inicio"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "Fin"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "Africa/Bangui",
+  "title": "solucion",
+  "uid": "ee2x32z3mrthcb",
+  "version": 12,
+  "weekStart": ""
+}

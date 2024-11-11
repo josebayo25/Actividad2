@@ -1,0 +1,1024 @@
+{
+  "information" : {
+    "scenarioTime" : 604800
+  },
+  "berths" : [ {
+    "id" : "0",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "1",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "2",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "3",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "4",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "5",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "6",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "7",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "8",
+    "unavailableTimes" : [ {
+      "startingTime" : 0,
+      "endTime" : 36288
+    }, {
+      "startingTime" : 278208,
+      "endTime" : 302400
+    } ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  }, {
+    "id" : "9",
+    "unavailableTimes" : [ ],
+    "berthToStorageCost" : {
+      "0" : 60,
+      "1" : 60,
+      "2" : 60,
+      "3" : 60,
+      "4" : 60,
+      "5" : 60,
+      "6" : 60,
+      "7" : 60,
+      "8" : 60,
+      "9" : 60
+    }
+  } ],
+  "vessels" : [ {
+    "id" : "0",
+    "servicingTime" : 5257,
+    "arrivalTime" : 194391,
+    "containersToDeliverByStorage" : {
+      "0" : 9,
+      "1" : 5,
+      "2" : 5,
+      "3" : 5,
+      "4" : 6,
+      "5" : 8,
+      "6" : 7,
+      "7" : 8,
+      "8" : 5,
+      "9" : 7
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 7,
+      "1" : 6,
+      "2" : 5,
+      "3" : 9,
+      "4" : 8,
+      "5" : 6,
+      "6" : 9,
+      "7" : 5,
+      "8" : 8,
+      "9" : 5
+    }
+  }, {
+    "id" : "1",
+    "servicingTime" : 3650,
+    "arrivalTime" : 44186,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 7,
+      "2" : 5,
+      "3" : 5,
+      "4" : 9,
+      "5" : 5,
+      "6" : 6,
+      "7" : 8,
+      "8" : 8,
+      "9" : 8
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 7,
+      "1" : 9,
+      "2" : 9,
+      "3" : 7,
+      "4" : 8,
+      "5" : 7,
+      "6" : 8,
+      "7" : 8,
+      "8" : 5,
+      "9" : 7
+    }
+  }, {
+    "id" : "2",
+    "servicingTime" : 4690,
+    "arrivalTime" : 239380,
+    "containersToDeliverByStorage" : {
+      "0" : 6,
+      "1" : 9,
+      "2" : 8,
+      "3" : 6,
+      "4" : 7,
+      "5" : 9,
+      "6" : 7,
+      "7" : 6,
+      "8" : 7,
+      "9" : 9
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 7,
+      "1" : 8,
+      "2" : 8,
+      "3" : 9,
+      "4" : 5,
+      "5" : 5,
+      "6" : 6,
+      "7" : 6,
+      "8" : 7,
+      "9" : 6
+    }
+  }, {
+    "id" : "3",
+    "servicingTime" : 2615,
+    "arrivalTime" : 255182,
+    "containersToDeliverByStorage" : {
+      "0" : 9,
+      "1" : 7,
+      "2" : 5,
+      "3" : 7,
+      "4" : 5,
+      "5" : 6,
+      "6" : 7,
+      "7" : 8,
+      "8" : 7,
+      "9" : 8
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 5,
+      "2" : 8,
+      "3" : 5,
+      "4" : 7,
+      "5" : 6,
+      "6" : 7,
+      "7" : 9,
+      "8" : 5,
+      "9" : 7
+    }
+  }, {
+    "id" : "4",
+    "servicingTime" : 3120,
+    "arrivalTime" : 241306,
+    "containersToDeliverByStorage" : {
+      "0" : 9,
+      "1" : 5,
+      "2" : 9,
+      "3" : 8,
+      "4" : 7,
+      "5" : 5,
+      "6" : 9,
+      "7" : 9,
+      "8" : 8,
+      "9" : 9
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 5,
+      "1" : 8,
+      "2" : 9,
+      "3" : 5,
+      "4" : 5,
+      "5" : 8,
+      "6" : 6,
+      "7" : 5,
+      "8" : 6,
+      "9" : 6
+    }
+  }, {
+    "id" : "5",
+    "servicingTime" : 2830,
+    "arrivalTime" : 267029,
+    "containersToDeliverByStorage" : {
+      "0" : 8,
+      "1" : 9,
+      "2" : 7,
+      "3" : 5,
+      "4" : 7,
+      "5" : 6,
+      "6" : 9,
+      "7" : 6,
+      "8" : 8,
+      "9" : 9
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 8,
+      "2" : 5,
+      "3" : 5,
+      "4" : 7,
+      "5" : 8,
+      "6" : 8,
+      "7" : 8,
+      "8" : 7,
+      "9" : 9
+    }
+  }, {
+    "id" : "6",
+    "servicingTime" : 3424,
+    "arrivalTime" : 156633,
+    "containersToDeliverByStorage" : {
+      "0" : 6,
+      "1" : 8,
+      "2" : 9,
+      "3" : 6,
+      "4" : 5,
+      "5" : 9,
+      "6" : 5,
+      "7" : 7,
+      "8" : 9,
+      "9" : 5
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 5,
+      "1" : 9,
+      "2" : 5,
+      "3" : 8,
+      "4" : 6,
+      "5" : 8,
+      "6" : 8,
+      "7" : 9,
+      "8" : 6,
+      "9" : 9
+    }
+  }, {
+    "id" : "7",
+    "servicingTime" : 3247,
+    "arrivalTime" : 168571,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 5,
+      "2" : 7,
+      "3" : 6,
+      "4" : 7,
+      "5" : 8,
+      "6" : 6,
+      "7" : 8,
+      "8" : 6,
+      "9" : 9
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 6,
+      "2" : 9,
+      "3" : 5,
+      "4" : 8,
+      "5" : 6,
+      "6" : 9,
+      "7" : 7,
+      "8" : 9,
+      "9" : 9
+    }
+  }, {
+    "id" : "8",
+    "servicingTime" : 947,
+    "arrivalTime" : 181499,
+    "containersToDeliverByStorage" : {
+      "0" : 7,
+      "1" : 9,
+      "2" : 8,
+      "3" : 9,
+      "4" : 5,
+      "5" : 8,
+      "6" : 6,
+      "7" : 7,
+      "8" : 6,
+      "9" : 9
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 7,
+      "2" : 9,
+      "3" : 8,
+      "4" : 5,
+      "5" : 8,
+      "6" : 8,
+      "7" : 8,
+      "8" : 6,
+      "9" : 5
+    }
+  }, {
+    "id" : "9",
+    "servicingTime" : 690,
+    "arrivalTime" : 27367,
+    "containersToDeliverByStorage" : {
+      "0" : 9,
+      "1" : 5,
+      "2" : 5,
+      "3" : 5,
+      "4" : 9,
+      "5" : 6,
+      "6" : 6,
+      "7" : 7,
+      "8" : 5,
+      "9" : 7
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 8,
+      "1" : 5,
+      "2" : 8,
+      "3" : 8,
+      "4" : 8,
+      "5" : 9,
+      "6" : 9,
+      "7" : 5,
+      "8" : 9,
+      "9" : 8
+    }
+  }, {
+    "id" : "10",
+    "servicingTime" : 4187,
+    "arrivalTime" : 216091,
+    "containersToDeliverByStorage" : {
+      "0" : 7,
+      "1" : 5,
+      "2" : 7,
+      "3" : 8,
+      "4" : 7,
+      "5" : 9,
+      "6" : 5,
+      "7" : 5,
+      "8" : 9,
+      "9" : 6
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 6,
+      "1" : 8,
+      "2" : 6,
+      "3" : 9,
+      "4" : 5,
+      "5" : 9,
+      "6" : 7,
+      "7" : 5,
+      "8" : 6,
+      "9" : 9
+    }
+  }, {
+    "id" : "11",
+    "servicingTime" : 3647,
+    "arrivalTime" : 167231,
+    "containersToDeliverByStorage" : {
+      "0" : 8,
+      "1" : 9,
+      "2" : 7,
+      "3" : 6,
+      "4" : 8,
+      "5" : 9,
+      "6" : 5,
+      "7" : 5,
+      "8" : 9,
+      "9" : 6
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 5,
+      "1" : 8,
+      "2" : 5,
+      "3" : 7,
+      "4" : 8,
+      "5" : 7,
+      "6" : 8,
+      "7" : 8,
+      "8" : 9,
+      "9" : 7
+    }
+  }, {
+    "id" : "12",
+    "servicingTime" : 3142,
+    "arrivalTime" : 225367,
+    "containersToDeliverByStorage" : {
+      "0" : 8,
+      "1" : 8,
+      "2" : 9,
+      "3" : 7,
+      "4" : 5,
+      "5" : 7,
+      "6" : 6,
+      "7" : 6,
+      "8" : 7,
+      "9" : 9
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 6,
+      "2" : 8,
+      "3" : 7,
+      "4" : 7,
+      "5" : 7,
+      "6" : 5,
+      "7" : 8,
+      "8" : 6,
+      "9" : 9
+    }
+  }, {
+    "id" : "13",
+    "servicingTime" : 2072,
+    "arrivalTime" : 177233,
+    "containersToDeliverByStorage" : {
+      "0" : 6,
+      "1" : 7,
+      "2" : 5,
+      "3" : 9,
+      "4" : 7,
+      "5" : 5,
+      "6" : 6,
+      "7" : 8,
+      "8" : 5,
+      "9" : 6
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 6,
+      "1" : 8,
+      "2" : 6,
+      "3" : 5,
+      "4" : 5,
+      "5" : 7,
+      "6" : 8,
+      "7" : 5,
+      "8" : 7,
+      "9" : 7
+    }
+  }, {
+    "id" : "14",
+    "servicingTime" : 4675,
+    "arrivalTime" : 85070,
+    "containersToDeliverByStorage" : {
+      "0" : 9,
+      "1" : 6,
+      "2" : 5,
+      "3" : 7,
+      "4" : 7,
+      "5" : 7,
+      "6" : 8,
+      "7" : 7,
+      "8" : 6,
+      "9" : 8
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 5,
+      "1" : 5,
+      "2" : 5,
+      "3" : 8,
+      "4" : 9,
+      "5" : 5,
+      "6" : 8,
+      "7" : 8,
+      "8" : 8,
+      "9" : 9
+    }
+  }, {
+    "id" : "15",
+    "servicingTime" : 4289,
+    "arrivalTime" : 42016,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 8,
+      "2" : 5,
+      "3" : 8,
+      "4" : 5,
+      "5" : 8,
+      "6" : 9,
+      "7" : 8,
+      "8" : 9,
+      "9" : 6
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 6,
+      "1" : 6,
+      "2" : 6,
+      "3" : 8,
+      "4" : 6,
+      "5" : 5,
+      "6" : 5,
+      "7" : 7,
+      "8" : 8,
+      "9" : 8
+    }
+  }, {
+    "id" : "16",
+    "servicingTime" : 790,
+    "arrivalTime" : 129702,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 9,
+      "2" : 8,
+      "3" : 6,
+      "4" : 6,
+      "5" : 8,
+      "6" : 7,
+      "7" : 8,
+      "8" : 6,
+      "9" : 7
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 8,
+      "2" : 6,
+      "3" : 9,
+      "4" : 6,
+      "5" : 7,
+      "6" : 8,
+      "7" : 7,
+      "8" : 7,
+      "9" : 9
+    }
+  }, {
+    "id" : "17",
+    "servicingTime" : 4317,
+    "arrivalTime" : 53534,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 8,
+      "2" : 6,
+      "3" : 9,
+      "4" : 7,
+      "5" : 6,
+      "6" : 7,
+      "7" : 5,
+      "8" : 8,
+      "9" : 9
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 8,
+      "1" : 7,
+      "2" : 9,
+      "3" : 7,
+      "4" : 8,
+      "5" : 6,
+      "6" : 7,
+      "7" : 6,
+      "8" : 9,
+      "9" : 6
+    }
+  }, {
+    "id" : "18",
+    "servicingTime" : 4540,
+    "arrivalTime" : 263323,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 9,
+      "2" : 8,
+      "3" : 5,
+      "4" : 6,
+      "5" : 5,
+      "6" : 7,
+      "7" : 7,
+      "8" : 6,
+      "9" : 7
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 5,
+      "1" : 9,
+      "2" : 8,
+      "3" : 9,
+      "4" : 9,
+      "5" : 5,
+      "6" : 6,
+      "7" : 8,
+      "8" : 5,
+      "9" : 6
+    }
+  }, {
+    "id" : "19",
+    "servicingTime" : 4546,
+    "arrivalTime" : 8672,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 6,
+      "2" : 7,
+      "3" : 7,
+      "4" : 6,
+      "5" : 8,
+      "6" : 6,
+      "7" : 6,
+      "8" : 5,
+      "9" : 6
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 8,
+      "1" : 6,
+      "2" : 8,
+      "3" : 6,
+      "4" : 9,
+      "5" : 7,
+      "6" : 7,
+      "7" : 7,
+      "8" : 8,
+      "9" : 6
+    }
+  }, {
+    "id" : "20",
+    "servicingTime" : 3353,
+    "arrivalTime" : 153108,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 6,
+      "2" : 6,
+      "3" : 6,
+      "4" : 6,
+      "5" : 7,
+      "6" : 6,
+      "7" : 5,
+      "8" : 8,
+      "9" : 8
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 6,
+      "2" : 8,
+      "3" : 7,
+      "4" : 6,
+      "5" : 7,
+      "6" : 8,
+      "7" : 8,
+      "8" : 9,
+      "9" : 7
+    }
+  }, {
+    "id" : "21",
+    "servicingTime" : 835,
+    "arrivalTime" : 83536,
+    "containersToDeliverByStorage" : {
+      "0" : 6,
+      "1" : 8,
+      "2" : 7,
+      "3" : 7,
+      "4" : 5,
+      "5" : 7,
+      "6" : 6,
+      "7" : 5,
+      "8" : 8,
+      "9" : 9
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 5,
+      "1" : 7,
+      "2" : 6,
+      "3" : 6,
+      "4" : 5,
+      "5" : 6,
+      "6" : 7,
+      "7" : 6,
+      "8" : 7,
+      "9" : 9
+    }
+  }, {
+    "id" : "22",
+    "servicingTime" : 1292,
+    "arrivalTime" : 84660,
+    "containersToDeliverByStorage" : {
+      "0" : 6,
+      "1" : 8,
+      "2" : 9,
+      "3" : 8,
+      "4" : 7,
+      "5" : 5,
+      "6" : 8,
+      "7" : 7,
+      "8" : 5,
+      "9" : 6
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 8,
+      "1" : 7,
+      "2" : 5,
+      "3" : 5,
+      "4" : 9,
+      "5" : 9,
+      "6" : 8,
+      "7" : 7,
+      "8" : 6,
+      "9" : 9
+    }
+  }, {
+    "id" : "23",
+    "servicingTime" : 3721,
+    "arrivalTime" : 270459,
+    "containersToDeliverByStorage" : {
+      "0" : 8,
+      "1" : 9,
+      "2" : 5,
+      "3" : 5,
+      "4" : 8,
+      "5" : 9,
+      "6" : 6,
+      "7" : 5,
+      "8" : 8,
+      "9" : 7
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 8,
+      "1" : 6,
+      "2" : 9,
+      "3" : 8,
+      "4" : 6,
+      "5" : 6,
+      "6" : 8,
+      "7" : 6,
+      "8" : 8,
+      "9" : 7
+    }
+  }, {
+    "id" : "24",
+    "servicingTime" : 2921,
+    "arrivalTime" : 280284,
+    "containersToDeliverByStorage" : {
+      "0" : 8,
+      "1" : 9,
+      "2" : 7,
+      "3" : 9,
+      "4" : 6,
+      "5" : 5,
+      "6" : 5,
+      "7" : 8,
+      "8" : 7,
+      "9" : 7
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 5,
+      "1" : 7,
+      "2" : 7,
+      "3" : 7,
+      "4" : 9,
+      "5" : 6,
+      "6" : 9,
+      "7" : 7,
+      "8" : 8,
+      "9" : 9
+    }
+  }, {
+    "id" : "25",
+    "servicingTime" : 791,
+    "arrivalTime" : 238986,
+    "containersToDeliverByStorage" : {
+      "0" : 6,
+      "1" : 7,
+      "2" : 9,
+      "3" : 5,
+      "4" : 5,
+      "5" : 6,
+      "6" : 9,
+      "7" : 9,
+      "8" : 5,
+      "9" : 7
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 7,
+      "1" : 5,
+      "2" : 7,
+      "3" : 6,
+      "4" : 9,
+      "5" : 6,
+      "6" : 9,
+      "7" : 9,
+      "8" : 5,
+      "9" : 9
+    }
+  }, {
+    "id" : "26",
+    "servicingTime" : 1728,
+    "arrivalTime" : 134715,
+    "containersToDeliverByStorage" : {
+      "0" : 5,
+      "1" : 7,
+      "2" : 9,
+      "3" : 9,
+      "4" : 7,
+      "5" : 6,
+      "6" : 6,
+      "7" : 8,
+      "8" : 6,
+      "9" : 7
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 7,
+      "1" : 8,
+      "2" : 9,
+      "3" : 5,
+      "4" : 6,
+      "5" : 9,
+      "6" : 7,
+      "7" : 6,
+      "8" : 9,
+      "9" : 6
+    }
+  }, {
+    "id" : "27",
+    "servicingTime" : 2830,
+    "arrivalTime" : 135844,
+    "containersToDeliverByStorage" : {
+      "0" : 7,
+      "1" : 9,
+      "2" : 7,
+      "3" : 8,
+      "4" : 8,
+      "5" : 7,
+      "6" : 6,
+      "7" : 5,
+      "8" : 5,
+      "9" : 6
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 5,
+      "1" : 9,
+      "2" : 9,
+      "3" : 8,
+      "4" : 6,
+      "5" : 6,
+      "6" : 7,
+      "7" : 8,
+      "8" : 9,
+      "9" : 9
+    }
+  }, {
+    "id" : "28",
+    "servicingTime" : 5343,
+    "arrivalTime" : 114053,
+    "containersToDeliverByStorage" : {
+      "0" : 6,
+      "1" : 9,
+      "2" : 6,
+      "3" : 9,
+      "4" : 6,
+      "5" : 6,
+      "6" : 8,
+      "7" : 6,
+      "8" : 6,
+      "9" : 8
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 6,
+      "2" : 5,
+      "3" : 7,
+      "4" : 8,
+      "5" : 6,
+      "6" : 9,
+      "7" : 9,
+      "8" : 9,
+      "9" : 7
+    }
+  }, {
+    "id" : "29",
+    "servicingTime" : 1807,
+    "arrivalTime" : 249356,
+    "containersToDeliverByStorage" : {
+      "0" : 9,
+      "1" : 7,
+      "2" : 7,
+      "3" : 8,
+      "4" : 6,
+      "5" : 7,
+      "6" : 8,
+      "7" : 9,
+      "8" : 5,
+      "9" : 5
+    },
+    "containersToRetrieveByStorage" : {
+      "0" : 9,
+      "1" : 6,
+      "2" : 8,
+      "3" : 9,
+      "4" : 6,
+      "5" : 5,
+      "6" : 7,
+      "7" : 7,
+      "8" : 8,
+      "9" : 5
+    }
+  } ],
+  "storages" : [ {
+    "id" : "0"
+  }, {
+    "id" : "1"
+  }, {
+    "id" : "2"
+  }, {
+    "id" : "3"
+  }, {
+    "id" : "4"
+  }, {
+    "id" : "5"
+  }, {
+    "id" : "6"
+  }, {
+    "id" : "7"
+  }, {
+    "id" : "8"
+  }, {
+    "id" : "9"
+  } ]
+}
